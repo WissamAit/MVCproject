@@ -22,10 +22,12 @@ import mvc.utils.Connexion;
 public class DaoPersonne implements IDaoPersonne{
 
 	Connection connexion = null;
+	
+	
 	// initialize the connection
 	public DaoPersonne() {
 		this.connexion = Connexion.getConnection();
-	}
+		}
 	
 
 	@Override
@@ -54,35 +56,57 @@ public class DaoPersonne implements IDaoPersonne{
 
 	@Override
 	public Personne getPersonneById(int id) {
-		Personne personne = null;
-		try {
-		Statement smt = connexion.createStatement();
-		ResultSet resultSet = smt.executeQuery("select * from personne where id_personne = '" + id + "' ");
-		
-		// Check if there is any result
-		if (resultSet.next()) {
-			/** if the given id is found in the database we execute this bloc  */			
+		ArrayList<Personne> personnes = new ArrayList<Personne>();
 
-			int idPersonne 	= resultSet.getInt("id_personne") ;
-			String nom 		= resultSet.getString("nom") ;
-			int age 		= resultSet.getInt("age") ;
-			String adresse 	=resultSet.getString("adresse") ;
+		
+		try {
+			/** 1- prepare the query to get all personnes */
+			Statement smt = connexion.createStatement();
+			ResultSet resultSet = smt.executeQuery("select * from personne where id_personne='"+id+"'") ;
 			
-			personne = new Personne(idPersonne, nom, age, adresse);
-		}
-		
-		// Here we can find two cases : if the result found we return the Personne built in the if bloc
-		// Else we return null because we didnt initialize the personne variable
+			/** 2- build a result to return to the service */			
+			while (resultSet.next()) {
+				int idPersonne 	= resultSet.getInt("id_personne") ;
+				String nom 		= resultSet.getString("nom") ;
+				int age 			= resultSet.getInt("age") ;
+				String adresse 	=resultSet.getString("adresse") ;
+				Personne personne = new Personne(idPersonne, nom, age, adresse);
+			
+				personnes.add(personne);
+			
 		return personne;
-		
-		}catch (Exception e) {
-			return null;
+		}}
+		catch (SQLException e) {e.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override
-	public boolean addPersonne(Personne personne) {
-		// TODO Auto-generated method stub
+	public boolean addPersonne(int id_personne, String nom, int age, String adresse) {
+		 ArrayList<Personne> personnes = new ArrayList<Personne>();
+
+			
+			try {
+				Statement smt = connexion.createStatement();
+				String sql="INSERT INTO personne VALUES( '"+id_personne+"', '"+nom+"', '"+age+"','"+adresse+"')";
+				smt.executeUpdate(sql);	
+				ResultSet resultSet = smt.executeQuery("select * from personne") ;
+				/** 2- build a result to return to the service */			
+				while (resultSet.next()) {
+					int id_personnes 	= resultSet.getInt("id_personne") ;
+					String noms 		= resultSet.getString("nom") ;
+					int ages 			= resultSet.getInt("age") ;
+					String adresses 	=resultSet.getString("adresse") ;
+					Personne person = new Personne(id_personnes, noms, ages, adresses);
+				personnes.add(person);
+				System.out.println(personnes);
+					
+				
+			return true;
+			}}
+			catch (SQLException e) {e.printStackTrace();
+			}
+			
 		return false;
 	}
 
@@ -93,14 +117,64 @@ public class DaoPersonne implements IDaoPersonne{
 	}
 
 	@Override
-	public boolean deletePersonne(Personne personne) {
-		// TODO Auto-generated method stub
+	public boolean deletePersonne(int id_personne, String nom, int age, String adresse) {
+    ArrayList<Personne> personnes = new ArrayList<Personne>();
+
+		
+		try {
+			Statement smt = connexion.createStatement();
+			
+			Personne person=new Personne(id_personne, nom, age, adresse);
+			String sql=("delete from personne where nom='"+nom+"' ") ;
+			smt.executeUpdate(sql);	
+			ResultSet resultSet = smt.executeQuery("select * from personne") ;
+			/** 2- build a result to return to the service */			
+			while (resultSet.next()) {
+				int id_personnes 	= resultSet.getInt("id_personne") ;
+				String noms 		= resultSet.getString("nom") ;
+				int ages 			= resultSet.getInt("age") ;
+				String adresses 	=resultSet.getString("adresse") ;
+				Personne personne = new Personne(id_personnes, noms, ages, adresses);
+			personnes.remove(person);
+			System.out.println(personnes);
+				
+			
+		return true;
+		}}
+		catch (SQLException e) {e.printStackTrace();
+		}
+		
+		
 		return false;
 	}
 
 	@Override
 	public boolean deletePersonneById(int idPersonne) {
-		// TODO Auto-generated method stub
+ArrayList<Personne> personnes = new ArrayList<Personne>();
+
+		
+		try {
+			Statement smt = connexion.createStatement();
+			String sql=("delete from personne where id_personne="+idPersonne+"") ;
+			smt.executeUpdate(sql);	
+			ResultSet resultSet = smt.executeQuery("select * from personne") ;
+			/** 2- build a result to return to the service */			
+			while (resultSet.next()) {
+				int idPersonnes 	= resultSet.getInt("id_personne") ;
+				String nom 		= resultSet.getString("nom") ;
+				int age 			= resultSet.getInt("age") ;
+				String adresse 	=resultSet.getString("adresse") ;
+				Personne personne = new Personne(idPersonnes, nom, age, adresse);
+			personnes.remove(personne);
+			System.out.println(personnes);
+				
+			
+		return true;
+		}}
+		catch (SQLException e) {e.printStackTrace();
+		}
+		
+		
 		return false;
 	}
 

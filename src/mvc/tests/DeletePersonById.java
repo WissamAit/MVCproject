@@ -11,9 +11,10 @@ import mvc.entity.Personne;
 import mvc.services.ServicePersonne;
 import mvc.utils.Connexion;
 
-public class TestConnexion {
+public class DeletePersonById {
 
-	public static void main(String[] args) throws SQLException {
+	
+public static void main(String[] args) throws SQLException {
 		
 		/********************************************************/
 		/******************** Before MVC ************************/
@@ -33,7 +34,7 @@ public class TestConnexion {
 			   personnes.add(personne);
 			}
 		
-	
+		System.out.println(personnes.toString());
 		/********************************************************/
 		
 		/********************************************************/
@@ -41,13 +42,6 @@ public class TestConnexion {
 		/********************************************************/
 		
 		ServicePersonne servicePersonne = new ServicePersonne();
-		ArrayList<Personne> listPersons = servicePersonne.getPersons();
-		System.out.println(listPersons);
-		
-		/********************************************************/
-				
-		
-	}
-
+	     servicePersonne.deletePersonById(5);
+		System.out.println(personnes);}
 }
-

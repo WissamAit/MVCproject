@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 /**
  * 
- * @author Wissam
+ 
  * Une classe de connexion pour créer un canal de communication avec la base de données
  */
 public class Connexion {

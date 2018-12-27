@@ -13,6 +13,7 @@ public class ServicePersonne implements IServicePersonne {
 
 	DaoPersonne daoPersonne = null;
 	public ServicePersonne() {
+		
 		this.daoPersonne = new DaoPersonne();
 	}
 	
@@ -24,14 +25,14 @@ public class ServicePersonne implements IServicePersonne {
 
 	@Override
 	public Personne getPersonById(int id) {
-		// forward the request to the related method in the DAO
+		// TODO Auto-generated method stub
 		return daoPersonne.getPersonneById(id);
 	}
 
 	@Override
-	public boolean createPerson(Personne personne) {
+	public boolean createPerson(int id_personne, String nom, int age, String adresse) {
 		// TODO Auto-generated method stub
-		return false;
+		return daoPersonne.addPersonne( id_personne,  nom,  age,  adresse);
 	}
 
 	@Override
@@ -41,15 +42,15 @@ public class ServicePersonne implements IServicePersonne {
 	}
 
 	@Override
-	public boolean deletePerson(Personne personne) {
+	public boolean deletePerson(int id_personne, String nom, int age, String adresse) {
 		// TODO Auto-generated method stub
-		return false;
+		return daoPersonne.deletePersonne( id_personne, nom,  age, adresse);
 	}
 
 	@Override
 	public boolean deletePersonById(int idPersonne) {
-		// TODO Auto-generated method stub
-		return false;
+		return daoPersonne.deletePersonneById(idPersonne);
 	}
 
 }
+

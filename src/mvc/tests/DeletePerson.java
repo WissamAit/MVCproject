@@ -7,13 +7,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import mvc.entity.Personne;
 import mvc.services.ServicePersonne;
 import mvc.utils.Connexion;
 
-public class TestConnexion {
+public class DeletePerson {
 
-	public static void main(String[] args) throws SQLException {
+public static void main(String[] args) throws SQLException {
 		
 		/********************************************************/
 		/******************** Before MVC ************************/
@@ -33,7 +34,7 @@ public class TestConnexion {
 			   personnes.add(personne);
 			}
 		
-	
+		System.out.println(personnes.toString());
 		/********************************************************/
 		
 		/********************************************************/
@@ -41,13 +42,8 @@ public class TestConnexion {
 		/********************************************************/
 		
 		ServicePersonne servicePersonne = new ServicePersonne();
-		ArrayList<Personne> listPersons = servicePersonne.getPersons();
-		System.out.println(listPersons);
 		
-		/********************************************************/
-				
-		
-	}
-
+		Personne person =servicePersonne.getPersonById(2);
+		servicePersonne.deletePerson(person.getidPersonne(),person.getNom(),person.getAge(),person.getAdresse());
+		System.out.println(personnes);}
 }
-

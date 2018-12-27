@@ -1,3 +1,4 @@
+
 package mvc.services;
 
 import java.util.ArrayList;
@@ -10,12 +11,16 @@ public interface IServicePersonne {
 		
 		public Personne getPersonById(int id);
 		
-		public boolean createPerson(Personne personne);
+		public boolean createPerson(int id_personne, String nom, int age, String adresse);
 		
 		public boolean updatePerson(Personne personne);
 		
-		public boolean deletePerson(Personne personne);
 		
 		public boolean deletePersonById(int idPersonne);
+
+		public boolean deletePerson(int id_personne, String nom, int age, String adresse);
+
+		
 		
 }
+

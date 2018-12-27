@@ -21,15 +21,19 @@ public interface IDaoPersonne {
 	public Personne getPersonneById(int id);
 	
 	// crée une nouvelle personne dans la base de données
-	public boolean addPersonne(Personne personne);
+	public boolean addPersonne(int id_personne, String nom, int age, String adresse);
 	
 	// mis à jour la personne donnée
 	public boolean updatePersonne(Personne personne);
 	
 	// supprime la personne donnée
-	public boolean deletePersonne(Personne personne);
+	
 	
 	// supprime la personne donnée selon un id
 	public boolean deletePersonneById(int idPersonne);
+
+	
+
+	public boolean deletePersonne(int id_personne, String nom, int age, String adresse);
 
 }

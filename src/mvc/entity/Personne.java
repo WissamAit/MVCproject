@@ -2,7 +2,7 @@ package mvc.entity;
 
 /**
  * 
- * @author wissam
+ * @author Hacene
  * 
  * Cette classe represente la classe entity (model) qui va traduire chaque tuple de la table personne de la bd
  * en un objet de type Personne en java
@@ -69,3 +69,4 @@ public class Personne {
 	
 	
 }
+
